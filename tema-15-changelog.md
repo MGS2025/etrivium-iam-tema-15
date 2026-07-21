@@ -4,6 +4,16 @@
 
 ---
 
+## v1.1 — 2026-07-21 — Añadida pestaña Índice
+
+**Estado**: pendiente de validación por María y Ana, y de revisión técnica del IAM (Jesús Cuadrado).
+
+**Motivo**: feedback de revisión — faltaba la pestaña "Índice" que sí tienen T13, T16 y T17 (T15 se generó antes de estandarizar esa pestaña en el patrón).
+
+**Cambio**: añadida la pestaña "Índice" al `index.html` (entre Contenido y Diagramas), con la estructura completa del tema (5 bloques, 27 epígrafes) y la tabla de "Conceptos clave para memorizar" (19 conceptos), usando el contenido ya existente en `tema-15-indice.md` que no se había volcado al HTML publicado. Sin cambios en el contenido teórico, test, casos ni fuentes.
+
+---
+
 ## v1.0 — 2026-06-11 — Primera versión
 
 **Estado**: pendiente de validación por María y Ana, y de revisión técnica del IAM (Jesús Cuadrado).
