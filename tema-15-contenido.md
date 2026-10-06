@@ -16,13 +16,13 @@
 
 Este tema incluye cuatro tipos de **cajas callout** para facilitar el estudio:
 
-> **[DATO CLAVE EXAMEN]** Información de alta densidad memorística, con alta probabilidad de aparecer en el test oficial.
+> **[DATO CLAVE]** Información de alta densidad memorística.
 
 > **[EJERCICIO RESUELTO]** Problema + solución paso a paso (transacciones, concurrencia, SQL de administración).
 
-> **[EJEMPLO AYTO MADRID]** Aplicación real de la teoría al entorno municipal (Padrón, tributos, expedientes, datos abiertos).
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Aplicación real de la teoría al entorno municipal (Padrón, tributos, expedientes, datos abiertos).
 
-> **[REFERENCIA CRUZADA]** Enlace conceptual a otros temas del temario oficial.
+> **[RELACIÓN CON OTROS TEMAS]** Enlace conceptual a otros temas del temario oficial.
 
 Los términos técnicos se mantienen en su nomenclatura original (SGBD, ACID, NoSQL, sharding…). Las fuentes se referencian con etiquetas breves tipo `[ELMASRI, cap. 21]` — el registro completo está en `tema-15-fuentes.md`.
 
@@ -45,7 +45,7 @@ Una **base de datos (BD)** es un conjunto de datos **relacionados** entre sí, o
 
 Un **Sistema de Gestión de Bases de Datos (SGBD / DBMS)** es el software que **crea, gestiona y controla** el acceso a la base de datos, actuando de intermediario entre los usuarios/aplicaciones y los datos físicos. Garantiza el acceso **concurrente, seguro, íntegro y eficiente**. [ELMASRI, cap. 1][SILBERSCHATZ-DB, cap. 1]
 
-> **[DATO CLAVE EXAMEN]** La **base de datos** es el conjunto de datos; el **SGBD (DBMS)** es el *software* que la gestiona. No confundirlos: Oracle, PostgreSQL o MySQL son SGBD; el padrón almacenado es la base de datos.
+> **[DATO CLAVE]** La **base de datos** es el conjunto de datos; el **SGBD (DBMS)** es el *software* que la gestiona. No confundirlos: Oracle, PostgreSQL o MySQL son SGBD; el padrón almacenado es la base de datos.
 
 ### 1.3. Funciones del SGBD
 
@@ -55,7 +55,7 @@ Las funciones esenciales de un SGBD son [DATE][CONNOLLY-BEGG]:
 - **Control**: garantizar **integridad** (reglas y restricciones), **seguridad** (permisos), **concurrencia** (accesos simultáneos) y **recuperación** ante fallos.
 - **Diccionario de datos (catálogo)**: almacena los **metadatos** —la descripción de la propia estructura de la base de datos (qué tablas, columnas, tipos, restricciones, usuarios existen)—. Es la "base de datos sobre la base de datos".
 
-> **[DATO CLAVE EXAMEN]** El **diccionario de datos** (o catálogo del sistema) contiene los **metadatos**: la descripción de la estructura de la BD. El SGBD lo consulta para resolver cada operación.
+> **[DATO CLAVE]** El **diccionario de datos** (o catálogo del sistema) contiene los **metadatos**: la descripción de la estructura de la BD. El SGBD lo consulta para resolver cada operación.
 
 ### 1.4. Componentes del SGBD
 
@@ -65,7 +65,7 @@ Internamente, un SGBD se organiza en módulos [SILBERSCHATZ-DB, cap. 1]:
 - **Gestor de almacenamiento (motor)**: gestiona los datos en disco, los **índices**, el buffer en memoria y el acceso físico.
 - **Gestor del diccionario**: administra los metadatos.
 
-> **[REFERENCIA CRUZADA]** El gestor de almacenamiento se apoya en las **estructuras de datos y la organización de ficheros** (índices B+árbol, organización directa/hash) que se desarrollan en el Tema 13.
+> **[RELACIÓN CON OTROS TEMAS]** El gestor de almacenamiento se apoya en las **estructuras de datos y la organización de ficheros** (índices B+árbol, organización directa/hash) que se desarrollan en el Tema 13.
 
 ### 1.5. Lenguajes de bases de datos
 
@@ -75,9 +75,9 @@ El estándar **SQL** integra varios sublenguajes [ISO-9075]:
 - **DCL (Data Control Language)**: controla el acceso — `GRANT`, `REVOKE`.
 - **TCL (Transaction Control Language)**: gestiona las transacciones — `COMMIT`, `ROLLBACK`, `SAVEPOINT`.
 
-> **[DATO CLAVE EXAMEN]** **DDL** define (CREATE/ALTER/DROP), **DML** manipula (SELECT/INSERT/UPDATE/DELETE), **DCL** controla el acceso (GRANT/REVOKE), **TCL** gestiona transacciones (COMMIT/ROLLBACK). Saber a qué grupo pertenece cada sentencia es de alto rendimiento en el test.
+> **[DATO CLAVE]** **DDL** define (CREATE/ALTER/DROP), **DML** manipula (SELECT/INSERT/UPDATE/DELETE), **DCL** controla el acceso (GRANT/REVOKE), **TCL** gestiona transacciones (COMMIT/ROLLBACK).
 
-> **[REFERENCIA CRUZADA]** El lenguaje SQL en profundidad (estándar ANSI, procedimientos almacenados, disparadores) se desarrolla en el Tema 19.
+> **[RELACIÓN CON OTROS TEMAS]** El lenguaje SQL en profundidad (estándar ANSI, procedimientos almacenados, disparadores) se desarrolla en el Tema 19.
 
 ### 1.6. Roles de usuario
 
@@ -100,7 +100,7 @@ Toda transacción debe cumplir las propiedades **ACID** [ACID-HAERDER]:
 - **Aislamiento (Isolation)**: el resultado de transacciones concurrentes es como si se hubieran ejecutado en serie; una no ve los estados intermedios de otra.
 - **Durabilidad (Durability)**: una vez confirmada (commit), el cambio persiste aunque falle el sistema (gracias al log).
 
-> **[DATO CLAVE EXAMEN]** **ACID**: **A**tomicidad (todo o nada), **C**onsistencia (estados válidos), a**I**slamiento (como si fueran en serie), **D**urabilidad (persiste tras el commit). `COMMIT` confirma; `ROLLBACK` deshace.
+> **[DATO CLAVE]** **ACID**: **A**tomicidad (todo o nada), **C**onsistencia (estados válidos), a**I**slamiento (como si fueran en serie), **D**urabilidad (persiste tras el commit). `COMMIT` confirma; `ROLLBACK` deshace.
 
 > **[EJERCICIO RESUELTO]** Una transferencia de 100 € de la cuenta A a la B son dos operaciones: `UPDATE A SET saldo=saldo-100` y `UPDATE B SET saldo=saldo+100`. Si tras la primera el sistema cae, la **atomicidad** garantiza el `ROLLBACK` automático al reiniciar: no puede quedar dinero "desaparecido". Solo cuando ambas tienen éxito se hace `COMMIT`.
 
@@ -116,7 +116,7 @@ Mecanismos de **control de concurrencia**:
 - **Bloqueos (locking)**: una transacción bloquea los datos que usa (compartido para lectura, exclusivo para escritura); el protocolo **2PL (bloqueo en dos fases)** garantiza la seriabilidad. Riesgo: **interbloqueo** entre transacciones.
 - **MVCC (control de concurrencia multiversión)**: el SGBD mantiene **varias versiones** de cada dato, de modo que los lectores no bloquean a los escritores ni viceversa (lo usan PostgreSQL y Oracle). [POSTGRES-DOC]
 
-> **[DATO CLAVE EXAMEN]** Anomalías de concurrencia: **lectura sucia** (lee no confirmado), **no repetible** (mismo dato cambia entre lecturas), **fantasma** (aparecen filas nuevas). Control con **bloqueos (2PL)** o **MVCC** (multiversión, lectores no bloquean a escritores).
+> **[DATO CLAVE]** Anomalías de concurrencia: **lectura sucia** (lee no confirmado), **no repetible** (mismo dato cambia entre lecturas), **fantasma** (aparecen filas nuevas). Control con **bloqueos (2PL)** o **MVCC** (multiversión, lectores no bloquean a escritores).
 
 ### 2.3. Niveles de aislamiento
 
@@ -135,7 +135,7 @@ Cuanto mayor el aislamiento, más consistencia pero menos concurrencia (rendimie
 
 El SGBD garantiza la **durabilidad** y la **atomicidad** ante caídas mediante un **registro de transacciones (log)**: antes de aplicar cambios, anota en el log lo que va a hacer (técnica **WAL, Write-Ahead Logging**). Tras un fallo, usa el log para **rehacer (redo)** las transacciones confirmadas y **deshacer (undo)** las no confirmadas. Los **checkpoints** (puntos de control) acotan cuánto log hay que recorrer. [SILBERSCHATZ-DB, cap. 19]
 
-> **[REFERENCIA CRUZADA]** El registro por diario (journaling) y los mecanismos de tolerancia a fallos del almacenamiento (RAID) que sustentan esta durabilidad se tratan en el Tema 13.
+> **[RELACIÓN CON OTROS TEMAS]** El registro por diario (journaling) y los mecanismos de tolerancia a fallos del almacenamiento (RAID) que sustentan esta durabilidad se tratan en el Tema 13.
 
 ---
 
@@ -150,9 +150,9 @@ La gran ventaja es la **independencia de datos**:
 - **Independencia física**: se puede cambiar el almacenamiento (añadir un índice, mover ficheros) sin afectar al nivel conceptual ni a las aplicaciones.
 - **Independencia lógica**: se puede cambiar el esquema conceptual (añadir una tabla o columna) sin afectar a las vistas externas existentes.
 
-> **[DATO CLAVE EXAMEN]** **ANSI/SPARC** = 3 esquemas: **interno** (físico, cómo se almacena), **conceptual** (lógico global, qué datos), **externo** (vistas por usuario). Permite la **independencia de datos**: física (cambiar almacenamiento sin tocar la lógica) y lógica (cambiar la lógica sin tocar las vistas).
+> **[DATO CLAVE]** **ANSI/SPARC** = 3 esquemas: **interno** (físico, cómo se almacena), **conceptual** (lógico global, qué datos), **externo** (vistas por usuario). Permite la **independencia de datos**: física (cambiar almacenamiento sin tocar la lógica) y lógica (cambiar la lógica sin tocar las vistas).
 
-> **[EJEMPLO AYTO MADRID]** En la base de datos del Padrón, el nivel **conceptual** define las entidades (habitante, vía, distrito); el nivel **externo** ofrece a la oficina de estadística una vista agregada por distrito y al personal de atención una vista del habitante individual; el nivel **interno** decide los índices y el almacenamiento físico. Añadir un índice por código postal (nivel interno) no obliga a cambiar ninguna aplicación: eso es la independencia física.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** En la base de datos del Padrón, el nivel **conceptual** define las entidades (habitante, vía, distrito); el nivel **externo** ofrece a la oficina de estadística una vista agregada por distrito y al personal de atención una vista del habitante individual; el nivel **interno** decide los índices y el almacenamiento físico. Añadir un índice por código postal (nivel interno) no obliga a cambiar ninguna aplicación: eso es la independencia física.
 
 ---
 
@@ -183,16 +183,16 @@ Ofrecen integridad, independencia de datos y un lenguaje declarativo potente. Ej
 
 **Operaciones del álgebra relacional** (fundamento formal de las consultas): **selección** (σ, filtra filas por una condición), **proyección** (π, elige columnas), **unión/intersección/diferencia** (entre tablas compatibles), **producto cartesiano** y, sobre todo, la **reunión (join)**, que combina filas de dos tablas según una condición (la más usada es el *inner join* por igualdad de claves; existen *left/right/full outer join* para conservar filas sin pareja).
 
-> **[DATO CLAVE EXAMEN]** El **modelo relacional** (Codd, 1970) organiza los datos en **tablas** con **clave primaria** (identifica, no nula ni repetida → integridad de entidad) y **clave ajena** (referencia a otra tabla → integridad referencial). El **join** combina tablas por sus claves. Es el modelo dominante y la base de **SQL**.
+> **[DATO CLAVE]** El **modelo relacional** (Codd, 1970) organiza los datos en **tablas** con **clave primaria** (identifica, no nula ni repetida → integridad de entidad) y **clave ajena** (referencia a otra tabla → integridad referencial). El **join** combina tablas por sus claves. Es el modelo dominante y la base de **SQL**.
 
-> **[REFERENCIA CRUZADA]** El **diseño** de bases de datos relacionales (modelo lógico, **normalización**) se desarrolla en el Tema 17; el **modelo conceptual** entidad-relación, en el Tema 16.
+> **[RELACIÓN CON OTROS TEMAS]** El **diseño** de bases de datos relacionales (modelo lógico, **normalización**) se desarrolla en el Tema 17; el **modelo conceptual** entidad-relación, en el Tema 16.
 
 ### 4.4. SGBD orientados a objetos y objeto-relacionales
 
 - **Orientados a objetos (OODBMS)**: almacenan **objetos** (con atributos y métodos), integrándose de forma natural con los lenguajes OO; útiles para datos complejos (CAD, multimedia), pero poco extendidos.
 - **Objeto-relacionales (ORDBMS)**: extienden el modelo relacional con **tipos complejos**, herencia y objetos, manteniendo SQL. Es el enfoque adoptado por Oracle y PostgreSQL (SQL:1999+). [ISO-9075-OR]
 
-> **[REFERENCIA CRUZADA]** Los conceptos de objeto, clase, herencia y método en que se apoyan estos SGBD se desarrollan en el Tema 20 (Programación orientada a objetos).
+> **[RELACIÓN CON OTROS TEMAS]** Los conceptos de objeto, clase, herencia y método en que se apoyan estos SGBD se desarrollan en el Tema 20 (Programación orientada a objetos).
 
 ### 4.5. SGBD NoSQL
 
@@ -217,7 +217,7 @@ Muchos NoSQL siguen el modelo **BASE** (Basically Available, Soft state, Eventua
 
 **Relacional vs NoSQL:** el relacional aporta esquema rígido, **ACID** e integridad fuerte (ideal para datos estructurados y transacciones, como tributos o nóminas); el NoSQL aporta **esquema flexible** y **escalado horizontal** (ideal para grandes volúmenes, datos semiestructurados y alta disponibilidad). No son excluyentes: muchas organizaciones combinan ambos (persistencia políglota).
 
-> **[DATO CLAVE EXAMEN]** **NoSQL** = no relacional, escala horizontal: **clave-valor** (Redis), **documental** (MongoDB), **columnar** (Cassandra), **grafos** (Neo4j). Muchos siguen **BASE** (consistencia eventual) en vez de ACID. **Teorema CAP**: solo 2 de 3 — **C**onsistencia, **A**vailability (disponibilidad), **P**artición. Relacional = integridad fuerte (ACID); NoSQL = flexibilidad y escala.
+> **[DATO CLAVE]** **NoSQL** = no relacional, escala horizontal: **clave-valor** (Redis), **documental** (MongoDB), **columnar** (Cassandra), **grafos** (Neo4j). Muchos siguen **BASE** (consistencia eventual) en vez de ACID. **Teorema CAP**: solo 2 de 3 — **C**onsistencia, **A**vailability (disponibilidad), **P**artición. Relacional = integridad fuerte (ACID); NoSQL = flexibilidad y escala.
 
 ### 4.6. SGBD multidimensionales y analítica de datos
 
@@ -225,9 +225,9 @@ Frente al procesamiento **OLTP (transaccional)** —muchas operaciones cortas de
 - Un **data warehouse (almacén de datos)** consolida datos históricos de varias fuentes para el análisis, separándolo de los sistemas operacionales.
 - Los **SGBD multidimensionales / OLAP** organizan los datos en **cubos** con dimensiones (tiempo, territorio, concepto) que permiten agregaciones rápidas (*drill-down*, *roll-up*). El **modelo en estrella** (una tabla de hechos rodeada de dimensiones) es el diseño típico.
 
-> **[DATO CLAVE EXAMEN]** **OLTP** = transaccional, operaciones cortas del día a día (el Padrón en funcionamiento). **OLAP** = analítico, consultas masivas sobre datos históricos (cuadros de mando). El **data warehouse** consolida datos para análisis; se modela en **cubos** y **estrella**.
+> **[DATO CLAVE]** **OLTP** = transaccional, operaciones cortas del día a día (el Padrón en funcionamiento). **OLAP** = analítico, consultas masivas sobre datos históricos (cuadros de mando). El **data warehouse** consolida datos para análisis; se modela en **cubos** y **estrella**.
 
-> **[EJEMPLO AYTO MADRID]** La gestión diaria del Padrón y de los tributos es **OLTP**. Para analizar la evolución demográfica por distrito y año, o cruzar recaudación con población, se construye un **data warehouse** con datos consolidados y se explota con herramientas **OLAP** (cuadros de mando del Ayuntamiento).
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** La gestión diaria del Padrón y de los tributos es **OLTP**. Para analizar la evolución demográfica por distrito y año, o cruzar recaudación con población, se construye un **data warehouse** con datos consolidados y se explota con herramientas **OLAP** (cuadros de mando del Ayuntamiento).
 
 ---
 
@@ -245,7 +245,7 @@ El SGBD controla **quién** puede hacer **qué** sobre cada objeto, mediante **p
 
 El DBA organiza el almacenamiento físico: **tablespaces** (espacios lógicos sobre ficheros), **índices** (para acelerar las consultas, normalmente B+árbol), y el **particionado** de tablas grandes (por rango de fechas, por territorio) para mejorar el rendimiento y el mantenimiento.
 
-> **[REFERENCIA CRUZADA]** Los índices (B+árbol), la organización de ficheros y los sistemas de almacenamiento subyacentes se tratan en el Tema 13; el almacenamiento y su virtualización, en el Tema 26.
+> **[RELACIÓN CON OTROS TEMAS]** Los índices (B+árbol), la organización de ficheros y los sistemas de almacenamiento subyacentes se tratan en el Tema 13; el almacenamiento y su virtualización, en el Tema 26.
 
 ### 5.3. SGBD distribuidos
 
@@ -265,7 +265,7 @@ El DBA define la política de **backup**:
 - **Incremental / diferencial**: copia solo lo cambiado desde la última copia, ahorrando espacio y tiempo.
 - **Recuperación a un punto en el tiempo (PITR, Point-In-Time Recovery)**: combinando una copia con el **log de transacciones** se restaura la BD al instante exacto anterior a un incidente. [POSTGRES-DOC]
 
-> **[DATO CLAVE EXAMEN]** Tipos de copia: **completa** (todo), **incremental/diferencial** (solo lo cambiado). El **PITR** (recuperación a un punto en el tiempo) usa la copia + el **log** para volver al instante previo a un error. El backup es exigencia del **ENS**.
+> **[DATO CLAVE]** Tipos de copia: **completa** (todo), **incremental/diferencial** (solo lo cambiado). El **PITR** (recuperación a un punto en el tiempo) usa la copia + el **log** para volver al instante previo a un error. El backup es exigencia del **ENS**.
 
 ### 5.6. Gobernanza del dato
 
@@ -275,7 +275,7 @@ La **gobernanza** establece las políticas y responsabilidades sobre el dato com
 
 El **tuning** (ajuste de rendimiento) parte de analizar las consultas lentas con el **plan de ejecución** (`EXPLAIN`), que muestra cómo el optimizador resuelve la consulta. Las palancas habituales: **crear índices** adecuados, **reescribir consultas** ineficientes, **actualizar estadísticas** del optimizador, ajustar la **memoria/buffer** y revisar bloqueos e interbloqueos. [SILBERSCHATZ-DB]
 
-> **[EJEMPLO AYTO MADRID]** Si la consulta de un ciudadano por DNI en el Padrón tarda demasiado, el DBA revisa el **plan de ejecución**: si detecta un *full table scan* (recorrido completo de millones de filas), crea un **índice** sobre el DNI, que reduce la búsqueda a O(log n). Es la aplicación directa de los índices del Tema 13 a la administración real.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Si la consulta de un ciudadano por DNI en el Padrón tarda demasiado, el DBA revisa el **plan de ejecución**: si detecta un *full table scan* (recorrido completo de millones de filas), crea un **índice** sobre el DNI, que reduce la búsqueda a O(log n). Es la aplicación directa de los índices del Tema 13 a la administración real.
 
 ### 5.8. SGBD en la nube (DBaaS)
 
@@ -283,7 +283,7 @@ La **base de datos como servicio (DBaaS)** ofrece SGBD gestionados en la nube (A
 - **Ventajas**: el proveedor gestiona la infraestructura, las copias, los parches y el escalado; pago por uso; alta disponibilidad y escalado elásticos.
 - **Inconvenientes/gobierno**: dependencia del proveedor (*vendor lock-in*), **ubicación de los datos** y cumplimiento (RGPD: datos en la UE), seguridad compartida y costes variables. En el sector público, la decisión debe respetar el **ENS**, el RGPD y los requisitos de soberanía del dato.
 
-> **[REFERENCIA CRUZADA]** Los modelos de servicio en la nube (IaaS/PaaS/SaaS) y sus implicaciones se desarrollan en el Tema 31; la seguridad de la información y el cifrado, en el Tema 32.
+> **[RELACIÓN CON OTROS TEMAS]** Los modelos de servicio en la nube (IaaS/PaaS/SaaS) y sus implicaciones se desarrollan en el Tema 31; la seguridad de la información y el cifrado, en el Tema 32.
 
 ---
 
